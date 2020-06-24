@@ -1,0 +1,207 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name RozcomOem
+import Alamofire
+import Foundation
+import GLKit
+import NVActivityIndicatorView
+import QMChatViewController
+import Quickblox
+import QuickbloxWebRTC
+@_exported import RozcomOem
+import Swift
+import SwiftyJSON
+import UIKit
+@objc public class ROLoginManager : ObjectiveC.NSObject {
+  public static var instance: RozcomOem.ROLoginManager
+  public var isConnecting: Swift.Bool
+  public func connectToQuickBlox(quickBloxUserId: Swift.Int, password: Swift.String, quickBloxLogin: Swift.String, completion: @escaping Quickblox.QBChatCompletionBlock)
+  public func loginToQuickBlox(quickBloxLogin: Swift.String, password: Swift.String, completition: @escaping (Swift.Result<Quickblox.QBUUser, Swift.Error>) -> ())
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension UIViewController {
+  public func hideNavigationBar()
+  public func showNavigationBar()
+  public func alert(message: Swift.String = "", title: Swift.String = "", buttonOkText: Swift.String = "Ok", buttonCancelText: Swift.String = "Cancel", withCancel: Swift.Bool = false, handlerOk: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
+}
+extension UIViewController {
+  public static func instance() -> Self
+}
+open class ROPanel : Swift.Codable {
+  public var secondForCall: Swift.Int {
+    get
+  }
+  public var id: Swift.Int?
+  final public let buildingID: Swift.Int
+  final public let apartmentNo: Swift.Int
+  final public let isSecurity: Swift.Int
+  final public let name: Swift.String
+  final public let qbID: Swift.Int
+  final public let qbLogin: Swift.String
+  public var qbPassword: Swift.String?
+  public var entranceId: Swift.Int?
+  public var callId: Swift.String?
+  public init(buildingID: Swift.Int, apartmentNo: Swift.Int, isSecurity: Swift.Int, name: Swift.String, qbID: Swift.Int, qbLogin: Swift.String)
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+  open func encode(to encoder: Swift.Encoder) throws
+}
+public enum ApiError : Foundation.LocalizedError {
+  case notUser
+  case serverError
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: RozcomOem.ApiError, b: RozcomOem.ApiError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc open class ROAPIManager : ObjectiveC.NSObject {
+  public static var sharedInstance: RozcomOem.ROAPIManager
+  public func getAuth(phone: Swift.String, competition: @escaping (Swift.Result<Swift.Int, Swift.Error>) -> ())
+  public func getListMons(buildingId: Swift.Int, competition: @escaping (Swift.Result<[RozcomOem.ROMonitor], Swift.Error>) -> ())
+  public func getUserDetails(phone: Swift.String, authCode: Swift.String, competition: @escaping (Swift.Result<RozcomOem.ROTenant, Swift.Error>) -> ())
+  public func getUserPicture(panelId: Swift.Int, competition: @escaping (Swift.Result<Swift.String, Swift.Error>) -> ())
+  public func getListEntrance(building: Swift.Int, isMons: Swift.Bool = false, competition: @escaping (Swift.Result<[RozcomOem.ROPanel], Swift.Error>) -> ())
+  public func setDND(qblogin: Swift.String, dnd: Swift.Bool, competition: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> ())
+  @objc deinit
+}
+open class RozcomOem {
+  open class func setup(applicationID: Swift.UInt, authKey: Swift.String, authSecret: Swift.String, accountKey: Swift.String, apiEndPoint: Swift.String? = nil, chatEndpoint: Swift.String? = nil)
+  open class func setupQuickBloxICE(urls: [Swift.String], userName: Swift.String, password: Swift.String)
+  open class func getBuildNumber() -> Swift.String
+  open class func getVersionNumber() -> Swift.String
+  @objc deinit
+}
+@objc public class ViewFromXib : UIKit.UIView {
+  @objc override dynamic public func prepareForInterfaceBuilder()
+  @objc deinit
+}
+public struct ROConstants {
+  public struct Message {
+    public static var saveToHistory: Swift.String
+    public static var activeChat: Swift.String
+    public static var closeChat: Swift.String
+    public static var getCall: Swift.String
+    public static var openDoor: Swift.String
+    public static var openDoorTwo: Swift.String
+    public static var lineBusy: Swift.String
+    public static var updateBuildings: Swift.String
+    public static var endCall: Swift.String
+    public static var inShift: Swift.String
+    public static var notInShift: Swift.String
+    public static var hold: Swift.String
+    public static var stopHold: Swift.String
+    public static var openDoorResponse: Swift.String
+    public static var openDoorResponseTwo: Swift.String
+    public static var loadImage: Swift.String
+    public static var monitorCall: Swift.String
+    public static var stopRing: Swift.String
+    public static var displayDoorWithTenant: Swift.String
+    public static var messageFollowMe: Swift.String
+    public static var messageFollowMeHungUp: Swift.String
+  }
+  public struct Params {
+    public static var start: Swift.String
+  }
+  public struct Colors {
+    public static var chatBackground: UIKit.UIColor
+  }
+}
+@objc open class ROTenant : ObjectiveC.NSObject, Swift.Decodable, Foundation.NSCoding {
+  public var qbLogin: Swift.String
+  public var entraceId: Swift.String?
+  public var apartmentNo: Swift.Int?
+  public var buildingId: Swift.Int?
+  public var isAdmin: Swift.Bool?
+  public var lastName: Swift.String?
+  public var firstName: Swift.String
+  public var qbId: Swift.Int
+  public var qbPassword: Swift.String?
+  public var isSecurity: Swift.Bool?
+  public var callType: Swift.String?
+  public var called: Swift.String?
+  public var phone: Swift.String?
+  required public init(from decoder: Swift.Decoder) throws
+  @objc public func encode(with coder: Foundation.NSCoder)
+  @objc required public convenience init?(coder: Foundation.NSCoder)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc open class ROChatViewController : QMChatViewController.QMChatViewController {
+  public var oponentPanel: RozcomOem.ROPanel!
+  public var currentTenant: RozcomOem.ROTenant!
+  @objc override dynamic open func viewDidLoad()
+  @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic open func viewDidDisappear(_ animated: Swift.Bool)
+  @objc deinit
+  public func setup(endCall: UIKit.UIImage, openAll: UIKit.UIImage, openDoor: UIKit.UIImage, gateText: Swift.String, sureOpenGateText: Swift.String, userBusyText: Swift.String)
+  @objc override dynamic open func didPressSend(_ button: UIKit.UIButton, withMessageText text: Swift.String, senderId: Swift.UInt, senderDisplayName: Swift.String, date: Foundation.Date)
+  @objc override dynamic open func viewClass(forItem item: Quickblox.QBChatMessage) -> Swift.AnyClass
+  @objc override dynamic open func bottomLabelAttributedString(forItem message: Quickblox.QBChatMessage) -> Foundation.NSMutableAttributedString
+  @objc override dynamic open func attributedString(forItem messageItem: Quickblox.QBChatMessage) -> Foundation.NSAttributedString?
+  @objc override dynamic open func topLabelAttributedString(forItem message: Quickblox.QBChatMessage) -> Foundation.NSMutableAttributedString?
+  @objc override dynamic open func collectionView(_ collectionView: QMChatViewController.QMChatCollectionView!, dynamicSizeAt indexPath: Foundation.IndexPath!, maxWidth: CoreGraphics.CGFloat) -> CoreGraphics.CGSize
+  @objc override dynamic open func collectionView(_ collectionView: QMChatViewController.QMChatCollectionView!, minWidthAt indexPath: Foundation.IndexPath!) -> CoreGraphics.CGFloat
+  @objc override dynamic open func collectionView(_ collectionView: QMChatViewController.QMChatCollectionView, configureCell cell: UIKit.UICollectionViewCell, for indexPath: Foundation.IndexPath)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+extension ROChatViewController : Quickblox.QBChatDelegate {
+  @objc dynamic open func chatDidReceive(_ message: Quickblox.QBChatMessage)
+  @objc dynamic open func chatDidConnect()
+}
+@objc open class ROVideoChatManager : ObjectiveC.NSObject {
+  public static var instanse: RozcomOem.ROVideoChatManager
+  public var session: QuickbloxWebRTC.QBRTCSession?
+  public func startCall(oponent: RozcomOem.ROPanel, user: RozcomOem.ROTenant, isEnableLocalAudio: Swift.Bool)
+  public func initializeAudio()
+  public func stopCall()
+  public func setLocalAudioEnable(value: Swift.Bool, connectedUserId: Foundation.NSNumber)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc open class ROChatManager : ObjectiveC.NSObject {
+  public var chatDialog: Quickblox.QBChatDialog?
+  public static var instance: RozcomOem.ROChatManager
+  public func createDialod(oponentQuickBloxId: Swift.Int, closureSuccess: @escaping (Quickblox.QBResponse, Quickblox.QBChatDialog) -> (Swift.Void), closureError: @escaping (Quickblox.QBResponse) -> (Swift.Void))
+  public func sendMessageWithCustomParams(currentUser: RozcomOem.ROTenant, startParam: Swift.String, completitionBlock: @escaping (Swift.Error?) -> (Swift.Void))
+  public func sendTextMessage(senderID: Swift.UInt, text: Swift.String, currentUser: RozcomOem.ROTenant, completitionBlock: @escaping (Swift.Error?) -> (Swift.Void)) -> Quickblox.QBChatMessage
+  public func disconnect(completion: Quickblox.QBChatCompletionBlock? = nil)
+  public func connect(quickBloxId: Swift.Int, password: Swift.String, completion: @escaping Quickblox.QBChatCompletionBlock)
+  @objc override dynamic public init()
+  @objc deinit
+}
+open class ROMonitor : Swift.Decodable {
+  public var apartmentNo: Swift.Int
+  public var lastName: Swift.String
+  public var firstName: Swift.String
+  public var qbId: Swift.Int
+  public var qbPassword: Swift.String
+  public var isSecurity: Swift.Bool
+  public var monID: Swift.Int
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+}
+@objc public class ProgressManager : ObjectiveC.NSObject {
+  public class func show()
+  public class func success()
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class ROCallView : RozcomOem.ViewFromXib {
+  @objc @IBOutlet weak public var lblConnecting: UIKit.UILabel!
+  @objc @IBOutlet weak public var btnMicrofone: UIKit.UIButton!
+  @objc @IBOutlet weak public var lblTimer: UIKit.UILabel!
+  @objc @IBOutlet weak public var qbRemoveVideoView: QuickbloxWebRTC.QBRTCRemoteVideoView!
+  public func prepareForReuse()
+  @objc deinit
+}
+@objc public class RORecieveCallView : RozcomOem.ViewFromXib {
+  public func setCallerName(name: Swift.String)
+  public func getUserPicture(oponentPanel: RozcomOem.ROPanel)
+  @objc deinit
+}
