@@ -33,16 +33,16 @@ open class ROPanel : Swift.Codable {
     get
   }
   public var id: Swift.Int?
-  final public let buildingID: Swift.Int
+  final public let buildingId: Swift.Int
   final public let apartmentNo: Swift.Int
   final public let isSecurity: Swift.Int
   final public let name: Swift.String
-  final public let qbID: Swift.Int
+  final public let qbId: Swift.Int
   final public let qbLogin: Swift.String
   public var qbPassword: Swift.String?
   public var entranceId: Swift.Int?
   public var callId: Swift.String?
-  public init(buildingID: Swift.Int, apartmentNo: Swift.Int, isSecurity: Swift.Int, name: Swift.String, qbID: Swift.Int, qbLogin: Swift.String)
+  public init(buildingId: Swift.Int, apartmentNo: Swift.Int, isSecurity: Swift.Int, name: Swift.String, qbId: Swift.Int, qbLogin: Swift.String)
   @objc deinit
   required public init(from decoder: Swift.Decoder) throws
   open func encode(to encoder: Swift.Encoder) throws
@@ -72,8 +72,6 @@ public enum ApiError : Foundation.LocalizedError {
 open class RozcomOem {
   open class func setup(applicationID: Swift.UInt, authKey: Swift.String, authSecret: Swift.String, accountKey: Swift.String, apiEndPoint: Swift.String? = nil, chatEndpoint: Swift.String? = nil)
   open class func setupQuickBloxICE(urls: [Swift.String], userName: Swift.String, password: Swift.String)
-  open class func getBuildNumber() -> Swift.String
-  open class func getVersionNumber() -> Swift.String
   @objc deinit
 }
 @objc public class ViewFromXib : UIKit.UIView {
@@ -180,9 +178,10 @@ open class ROMonitor : Swift.Decodable {
   public var lastName: Swift.String
   public var firstName: Swift.String
   public var qbId: Swift.Int
+  public var qbLogin: Swift.String
   public var qbPassword: Swift.String
   public var isSecurity: Swift.Bool
-  public var monID: Swift.Int
+  public var monId: Swift.Int
   required public init(from decoder: Swift.Decoder) throws
   @objc deinit
 }
